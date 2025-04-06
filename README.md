@@ -1,2 +1,2 @@
-# LLM-Based-Data-Visualization-Tool-_-Prototype
+# llm-data-visualization-app
 A prototype for LLM Based Data Visualization Tool
