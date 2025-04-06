@@ -65,14 +65,15 @@ prompt = st.text_area("Try something like: 'Show a pie chart of sales by region'
 if st.button("🚀 Generate Visualization") and prompt and df is not None:
     with st.spinner("🤖 Mistral 7B is thinking..."):
         chart_instructions, chart_summary = query_llm(prompt, df)
-        fig = generate_chart(df, chart_instructions)
 
-        st.markdown("### 📈 Visualization")
-        st.plotly_chart(fig, use_container_width=True)
+    # Always call generate_chart with a fallback-safe check
+    fig = generate_chart(df, chart_instructions)
+    st.markdown("### 📈 Visualization")
+    st.plotly_chart(fig, use_container_width=True)
 
-        if chart_summary:
-            st.markdown("### 🧠 Insights from Visualization")
-            st.success(chart_summary)
+    if chart_summary:
+        st.markdown("### 🧠 Insight from AI")
+        st.success(chart_summary)
 
 elif prompt and df is None:
     st.warning("⚠️ Please upload a dataset first.")
