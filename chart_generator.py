@@ -2,7 +2,7 @@ import plotly.express as px
 import pandas as pd
 
 def generate_chart(df, instructions):
-    # ✅ SAFETY CHECK (required)
+    # Safety: If instructions are missing or invalid
     if not instructions or not isinstance(instructions, dict):
         return px.scatter(
             x=[0], y=[0],
@@ -13,14 +13,14 @@ def generate_chart(df, instructions):
     x = instructions.get("x")
     y = instructions.get("y")
 
-    # ✅ COLUMN VALIDATION
+    # Safety: If x or y is missing or invalid
     if not x or not y or x not in df.columns or y not in df.columns:
         return px.scatter(
             x=[0], y=[0],
             title="❌ Invalid column names returned by LLM. Try rephrasing your prompt."
         )
 
-    # ✅ SUPPORTED CHART TYPES
+    # Chart generation
     if chart_type == "bar":
         return px.bar(df, x=x, y=y, title=f"Bar Chart: {y} by {x}")
     elif chart_type == "line":
